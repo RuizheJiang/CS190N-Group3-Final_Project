@@ -54,7 +54,7 @@ Key arguments:
 
 ## Results
 Key findings from the experiments:
-- **Accuracy**: 88.2%
+- **Accuracy**: 65%
 
 Feature importance and ablation studies confirmed that `window_mean` and `window_std` are critical for distinguishing TCP congestion control algorithms.
 
