@@ -37,6 +37,7 @@ class LSTMClassifier(nn.Module):
         :param x: 输入张量，形状为 (batch_size, seq_length, input_size)
         :return: 输出分类的 logits，形状为 (batch_size, num_classes)
         """
+
         # 初始化隐藏状态和细胞状态
         h0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(x.device)
         c0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(x.device)
@@ -50,3 +51,16 @@ class LSTMClassifier(nn.Module):
         # 全连接层
         out = self.fc(out)
         return out
+
+    def reset(self):
+        self.h = torch.zeros(self.num_layers, self.hidden_size)
+        self.c = torch.zeros(self.num_layers, self.hidden_size)
+
+    def step_forward(self, x):
+        # LSTM 前向传播
+        out, (self.h, self.c) = self.lstm(x.unsqueeze(-1), (self.h, self.c))
+        # 取最后一个时间步的输出
+        out = out[-1, :]
+        # 全连接层
+        out = self.fc(out)
+        return out, self.h, self.c
