@@ -112,8 +112,8 @@ def split_dataset(dataset, train_ratio=0.8, seed=None):
 
 # 使用示例
 if __name__ == "__main__":
-    path1 = "cubic200"
-    path2 = "reno200"
+    path1 = "cubic(2)"
+    path2 = "reno(2)"
     dataloader = FlowDataLoader(path1, path2)
     dataset = dataloader.load_data()
     formatted_data = [{"data": d, "label": l} for d, l in dataset]

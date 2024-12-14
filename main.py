@@ -11,13 +11,13 @@ if __name__ == "__main__":
     # 配置超参数
     seq_length = 100
     batch_size = 8
-    num_epochs = 10
+    num_epochs = 50
     learning_rate = 0.001
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
     # 创建数据集和 DataLoader
     dataset = PcapDataset()
-    train_dataset, val_dataset = split_dataset(dataset, seed=2024)
+    train_dataset, val_dataset = split_dataset(dataset, seed=401234)
     trainloader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
     testloader = DataLoader(val_dataset, batch_size=batch_size, shuffle=True)
 
